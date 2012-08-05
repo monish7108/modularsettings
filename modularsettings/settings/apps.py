@@ -1,4 +1,4 @@
-def require(**kwargs):
+def require(DEV_ENV, **kwargs):
 
     INSTALLED_APPS = (
         'django.contrib.auth',
@@ -12,5 +12,10 @@ def require(**kwargs):
         # Uncomment the next line to enable admin documentation:
         # 'django.contrib.admindocs',
     )
+
+    if DEV_ENV:
+        INSTALLED_APPS += (
+            'debug_toolbar',
+        )
 
     return locals()
