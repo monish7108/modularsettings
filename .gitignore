@@ -1,0 +1,4 @@
+modularsettings/settings/secrets.py
+databases/*
+media/*
+static/*
