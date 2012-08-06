@@ -1,6 +1,5 @@
-def require(DEV_ENV, **kwargs):
+import env
 
-    DEBUG = DEV_ENV
-    TEMPLATE_DEBUG = DEBUG
 
-    return locals()
+DEBUG = env.DEV_ENV
+TEMPLATE_DEBUG = DEBUG

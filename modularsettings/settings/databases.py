@@ -1,29 +1,29 @@
 import os
 
-def require(DEV_ENV, BASE_PATH, DATABASE_USER, DATABASE_PASSWORD,
-        DATABASE_HOST, DATABASE_PORT, **kwargs):
+import env
+import paths
+import secrets
 
-    if DEV_ENV:
-        database_dir = os.path.join(BASE_PATH, 'databases')
 
-        if not os.path.exists(database_dir):
-            os.mkdir(database_dir)
+if env.DEV_ENV:
+    database_dir = os.path.join(paths.BASE_PATH, 'databases')
 
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': os.path.join(database_dir, 'sqlite3'),
-            }
+    if not os.path.exists(database_dir):
+        os.mkdir(database_dir)
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(database_dir, 'sqlite3'),
         }
-    else:
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                'USER': DATABASE_USER,
-                'PASSWORD': DATABASE_PASSWORD,
-                'HOST': DATABASE_HOST,
-                'PORT': DATABASE_PORT,
-            }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'USER': secrets.DATABASE_USER,
+            'PASSWORD': secrets.DATABASE_PASSWORD,
+            'HOST': secrets.DATABASE_HOST,
+            'PORT': secrets.DATABASE_PORT,
         }
-
-    return locals()
+    }
